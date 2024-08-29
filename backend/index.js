@@ -1,7 +1,9 @@
 const express = require("express");
 const app = express();
+const dbConnect = require("./config/db.js");
 
 app.use(express.json());
+dbConnect();
 
 app.get("/", (req, res) => {
     res.json({
