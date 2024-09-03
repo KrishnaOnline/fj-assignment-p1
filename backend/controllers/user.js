@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = require("../utils/helper");
 require("dotenv").config();
 
-exports.registerUser = async (req, res) => {
+const registerUser = async (req, res) => {
     try {
         const {name, username, password} = req.body;
         if(!name || !username || !password) {
@@ -31,7 +31,7 @@ exports.registerUser = async (req, res) => {
     }
 }
 
-exports.loginUser = async (req, res) => {
+const loginUser = async (req, res) => {
     try {
         const {username, password} = req.body;
         if(!username || !password) {
@@ -48,7 +48,7 @@ exports.loginUser = async (req, res) => {
             const error = new ApiError(null, "Incorrect Password!");
             return res.status(401).json(error.getError());
         }
-        const token = jwt.sign({userId: user._id, username}, JWT_SECRET);
+        const token = await jwt.sign({id:user._id, username}, JWT_SECRET);
         const response = new ApiResponse(user, "User Logged In!");
         return res.header("Authorization", "Bearer "+token)
                   .status(200)
@@ -57,3 +57,5 @@ exports.loginUser = async (req, res) => {
         return res.status(500).json(serverError(err));
     }
 }
+
+module.exports = {registerUser, loginUser};

@@ -2,11 +2,14 @@ const express = require("express");
 const app = express();
 const dbConnect = require("./config/db.js");
 
-app.use(express.json());
+const userRoutes = require("./routes/user.js");
+const movieRoutes = require("./routes/movie.js");
+
 dbConnect();
 
-const userRoutes = require("./routes/user.js");
+app.use(express.json());
 app.use("/api/v1/user", userRoutes);
+app.use("/api/v1/movie", movieRoutes);
 
 app.get("/", (req, res) => {
     res.json({
@@ -14,6 +17,7 @@ app.get("/", (req, res) => {
     });
 })
 
-app.listen(5000, () => {
-    console.log("Server is Running at: http://localhost:5000/");
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+    console.log("Server is Running at: http://localhost:"+PORT);
 });
