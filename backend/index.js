@@ -5,6 +5,9 @@ const dbConnect = require("./config/db.js");
 app.use(express.json());
 dbConnect();
 
+const userRoutes = require("./routes/user.js");
+app.use("/api/v1/user", userRoutes);
+
 app.get("/", (req, res) => {
     res.json({
         message: "Server is Up and Running"

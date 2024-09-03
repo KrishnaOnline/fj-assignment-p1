@@ -1,20 +1,26 @@
 class ApiError {
-    constructor(err, message, statusCode, success=false) {
+    constructor(err, message, /*statusCode,*/ success=false) {
         this.success = success;
         this.err = err;
-        this.data = null;
         this.message = message;
-        this.statusCode = statusCode;
+        // this.data = null;
+        // this.statusCode = statusCode;
     }
     getError() {
         return {
             success: this.success,
-            err: this.err,
-            data: this.data,
+            error: this.err,
             message: this.message,
-            statusCode: this.statusCode,
+            // data: this.data,
+            // statusCode: this.statusCode,
         };
     }
 }
 
-export {ApiError};
+const serverError = (err) => {
+    console.log(err);
+    const error = new ApiError(err, err.message, 500);
+    return error.getError();
+}
+
+module.exports = {ApiError, serverError};
