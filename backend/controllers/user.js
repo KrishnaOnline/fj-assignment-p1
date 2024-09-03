@@ -1,6 +1,6 @@
-const { ApiError, serverError } = require("../config/apiError");
-const { ApiResponse } = require("../config/apiResponse");
-const User = require("../models/user");
+const { ApiError, serverError, throwError } = require("../config/apiError");
+const { ApiResponse, fetchResponse } = require("../config/apiResponse");
+const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = require("../utils/helper");
@@ -10,13 +10,15 @@ const registerUser = async (req, res) => {
     try {
         const {name, username, password} = req.body;
         if(!name || !username || !password) {
-            const error = new ApiError(null, "Enter all the Required Fields");
-            return res.status(403).json(error.getError());
+            return res.status(403).json(
+                throwError(null, "Provide all the required fields")
+            );
         }
         const userExists = await User.findOne({username});
         if(userExists) {
-            const error = new ApiError(null, "Username already Exists");
-            return res.json(error.getError());
+            return res.status(201).json(
+                throwError(null, "Username already exists")
+            );
         }
         const hashedPassword = await bcrypt.hash(password, 10);
         const user = await User.create({
@@ -24,8 +26,9 @@ const registerUser = async (req, res) => {
             username,
             password: hashedPassword,
         });
-        const response = new ApiResponse(user, "User Registered!");
-        return res.json(response.getResponse());
+        return res.status(201).json(
+            fetchResponse(user, "User Registered")
+        );
     } catch(err) {
         return res.status(500).json(serverError(err));
     }
@@ -35,18 +38,25 @@ const loginUser = async (req, res) => {
     try {
         const {username, password} = req.body;
         if(!username || !password) {
-            const error = new ApiError(null, "Both Fields are Required");
-            return res.status(403).json(error.getError());
+            // const error = new ApiError(null, "Both Fields are Required");
+            // return res.status(403).json(error.getError());
+            return res.status(403).json(
+                throwError(null, "Provide all the required fields")
+            );
         }
         let user = await User.findOne({username});
         if(!user) {
-            const error = new ApiError(null, "Username doesn't Exists");
-            return res.status(404).json(error.getError());
+            return res.status(404).json(
+                throwError(null, "Username doesn't Exists")
+            );
         }
         const isPasswordCorrect = await bcrypt.compare(password, user.password);
         if(!isPasswordCorrect) {
-            const error = new ApiError(null, "Incorrect Password!");
-            return res.status(401).json(error.getError());
+            // const error = new ApiError(null, "Incorrect Password!");
+            // return res.status(401).json(error.getError());
+            return res.status(401).json(
+                throwError(null, "Incorrect Password")
+            );
         }
         const token = await jwt.sign({id:user._id, username}, JWT_SECRET);
         const response = new ApiResponse(user, "User Logged In!");

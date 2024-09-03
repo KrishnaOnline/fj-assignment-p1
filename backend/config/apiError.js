@@ -1,5 +1,5 @@
 class ApiError {
-    constructor(err, message, /*statusCode,*/ success=false) {
+    constructor(err, /*statusCode,*/ message="Error", success=false) {
         this.success = success;
         this.err = err;
         this.message = message;
@@ -23,4 +23,9 @@ const serverError = (err) => {
     return error.getError();
 }
 
-module.exports = {ApiError, serverError};
+const throwError = (err, msg) => {
+    const error = new ApiError(err, msg);
+    return error.getError();
+}
+
+module.exports = {ApiError, throwError, serverError};

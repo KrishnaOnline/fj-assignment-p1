@@ -1,5 +1,5 @@
 class ApiResponse {
-    constructor(data, message, /*statusCode,*/ success=true) {
+    constructor(data, /*statusCode,*/ message="Successful", success=true) {
         this.success = success;
         this.data = data;
         this.message = message;
@@ -15,4 +15,9 @@ class ApiResponse {
     }
 }
 
-module.exports = {ApiResponse};
+const fetchResponse = (data, msg) => {
+    const response = new ApiResponse(data, msg);
+    return response.getResponse();
+}
+
+module.exports = {ApiResponse, fetchResponse};
