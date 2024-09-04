@@ -16,10 +16,6 @@ const createMovie = async (req, res) => {
         const newMovie = await Movie.create({
             name, yearOfRelease, plot, poster, actors, producer,
         });
-        // const user = await User.findById(req.user.id);
-        // await user.updateOne({
-        //     $push: {movies: newMovie._id}
-        // }, {new: true});
         await User.findByIdAndUpdate(req.user.id, {
             $push: {movies: newMovie._id}
         }, {new: true});
