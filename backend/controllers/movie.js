@@ -1,6 +1,8 @@
 const { serverError, throwError } = require("../config/apiError");
 const { fetchResponse } = require("../config/apiResponse");
+const Actor = require("../models/Actor");
 const Movie = require("../models/Movie");
+const Producer = require("../models/Producer");
 const User = require("../models/User");
 
 const createMovie = async (req, res) => {
@@ -21,6 +23,17 @@ const createMovie = async (req, res) => {
         await User.findByIdAndUpdate(req.user.id, {
             $push: {movies: newMovie._id}
         }, {new: true});
+        await Producer.findByIdAndUpdate(producer, {
+            $push: {movies: newMovie._id}
+        }, {new: true});
+        await Actor.updateMany({_id: {$in: actors}}, {
+            $push: {movies: newMovie._id}
+        });
+        // await Promise.all(actors?.map(async (actorId) => {
+        //     await Actor.findByIdAndUpdate(actorId, {
+        //         $push: {movies: newMovie._id}
+        //     })
+        // }));
         return res.status(201).json(
             fetchResponse(newMovie, "Added new Movie")
         )
