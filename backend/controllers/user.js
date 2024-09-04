@@ -8,7 +8,8 @@ require("dotenv").config();
 
 const registerUser = async (req, res) => {
     try {
-        const {name, username, password} = req.body;
+        let {name, username, password} = req.body;
+        username = username.toLowerCase();
         if(!name || !username || !password) {
             return res.status(403).json(
                 throwError(null, "Provide all the required fields")
@@ -16,7 +17,7 @@ const registerUser = async (req, res) => {
         }
         const userExists = await User.findOne({username});
         if(userExists) {
-            return res.status(201).json(
+            return res.status(403).json(
                 throwError(null, "Username already exists")
             );
         }

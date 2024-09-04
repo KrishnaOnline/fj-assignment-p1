@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
 const dbConnect = require("./config/db.js");
 
@@ -9,6 +10,7 @@ const producerRoutes = require("./routes/producer.js");
 
 dbConnect();
 
+app.use(cors());
 app.use(express.json());
 app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/movies", movieRoutes);
