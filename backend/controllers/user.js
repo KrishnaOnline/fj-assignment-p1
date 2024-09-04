@@ -1,4 +1,4 @@
-const { ApiError, serverError, throwError } = require("../config/apiError");
+const { serverError, throwError } = require("../config/apiError");
 const { ApiResponse, fetchResponse } = require("../config/apiResponse");
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
@@ -38,8 +38,6 @@ const loginUser = async (req, res) => {
     try {
         const {username, password} = req.body;
         if(!username || !password) {
-            // const error = new ApiError(null, "Both Fields are Required");
-            // return res.status(403).json(error.getError());
             return res.status(403).json(
                 throwError(null, "Provide all the required fields")
             );
@@ -52,8 +50,6 @@ const loginUser = async (req, res) => {
         }
         const isPasswordCorrect = await bcrypt.compare(password, user.password);
         if(!isPasswordCorrect) {
-            // const error = new ApiError(null, "Incorrect Password!");
-            // return res.status(401).json(error.getError());
             return res.status(401).json(
                 throwError(null, "Incorrect Password")
             );
@@ -68,4 +64,21 @@ const loginUser = async (req, res) => {
     }
 }
 
-module.exports = {registerUser, loginUser};
+const getUser = async (req, res) => {
+    try {
+        const {id} = req.params;
+        const user = await User.findById(id).populate('movies');
+        if(!user) {
+            return res.status(404).json(
+                throwError(null, "User Not found")
+            );
+        }
+        return res.status(200).json(
+            fetchResponse(user, "Fetched User!")
+        );
+    } catch(err) {
+        return res.status(500).json(serverError(err));
+    }
+}
+
+module.exports = {registerUser, loginUser, getUser};
