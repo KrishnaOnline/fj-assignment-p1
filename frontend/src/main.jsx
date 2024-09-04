@@ -4,16 +4,16 @@ import App from "./App.jsx";
 import { Toaster } from "react-hot-toast";
 import { BrowserRouter } from "react-router-dom";
 import { configureStore } from "@reduxjs/toolkit";
-// import rootReducer from "./redux/reducers.js";
+import rootReducer from "./redux/reducer.js";
 import {Provider} from "react-redux";
 
-// const store = configureStore({
-//     reducer: rootReducer,
-// });
+const store = configureStore({
+    reducer: rootReducer,
+});
 
 createRoot(document.getElementById("root")).render(
 	<StrictMode>
-		{/* <Provider store={store}> */}
+		<Provider store={store}>
             <BrowserRouter>
                 <App />
                 <Toaster
@@ -30,6 +30,6 @@ createRoot(document.getElementById("root")).render(
                     }}
                 />
             </BrowserRouter>
-        {/* </Provider> */}
+        </Provider>
 	</StrictMode>
 );
