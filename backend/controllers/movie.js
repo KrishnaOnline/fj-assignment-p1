@@ -40,7 +40,7 @@ const createMovie = async (req, res) => {
 
 const getAllMovies = async (req, res) => {
     try {
-        const allMovies = await Movie.find();
+        const allMovies = await Movie.find().populate('actors').populate('producer');
         return res.status(200).json(
             fetchResponse(allMovies, "Fetched all Movies")
         );
