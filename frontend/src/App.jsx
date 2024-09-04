@@ -4,18 +4,21 @@ import "./index.css";
 import Signup from "./Pages/Signup";
 import Login from "./Pages/Login";
 import Home from "./Pages/Home";
+import Navbar from "./Components/Navbar";
 
 function App() {
 
 	return (
-		<div className="max-w-[1280px] mx-auto">
-            <p>IMDB Clone</p>
-            <Routes>
-                {/* <Route path="/signup" element={<OpenRoute><Signup/></OpenRoute>}/> */}
-                <Route path="/" element={<Home/>}/>
-                <Route path="/signup" element={<Signup/>}/>
-                <Route path="/login" element={<Login/>}/>
-            </Routes>
+		<div>
+            <Navbar/>
+            <div className="max-w-[1280px] mx-auto">
+                <Routes>
+                    {/* <Route path="/signup" element={<OpenRoute><Signup/></OpenRoute>}/> */}
+                    <Route path="/" element={<Home/>}/>
+                    <Route path="/signup" element={<Signup/>}/>
+                    <Route path="/login" element={<Login/>}/>
+                </Routes>
+            </div>
         </div>
 	);
 }

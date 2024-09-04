@@ -19,7 +19,7 @@ function Login() {
     }
 
 	return (
-        <div className="mt-20 flex flex-col items-center justify-center">
+        <div className="mt-10 flex flex-col items-center justify-center">
             <p className="text-[45px] mb-1 text-app font-medium">Login</p>
             <form onSubmit={handleSubmit} className="flex mt-5 p-8 gap-8 rounded-xl shadow-lg shadow-black border-2 border-gray-700 flex-col justify-center items-center">
                 <div className="flex flex-col gap-4">
