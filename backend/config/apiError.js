@@ -19,7 +19,7 @@ class ApiError {
 
 const serverError = (err) => {
     console.log(err);
-    const error = new ApiError(err, err.message, 500);
+    const error = new ApiError(err, err.message);
     return error.getError();
 }
 

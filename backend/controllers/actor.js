@@ -48,6 +48,9 @@ const getActor = async (req, res) => {
                 throwError(null, "Actor doesn't exists")
             );
         }
+        return res.status(200).json(
+            fetchResponse(actor, "Fetched actor with ID: "+id)
+        );
     } catch(err) {
         return res.status(500).json(serverError(err));
     }

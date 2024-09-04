@@ -8,4 +8,4 @@ router.post("/", authZ, createActor);
 router.get("/:id", getActor);
 router.get("/", getAllActors);
 
-exports.modules = router;
+module.exports = router;
