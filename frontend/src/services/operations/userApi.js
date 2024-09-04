@@ -46,3 +46,25 @@ export const login = (data, navigate) => {
         }
     }
 }
+
+export const logout = (navigate) => {
+    return async (dispatch) => {
+        dispatch(setToken(null));
+        dispatch(setUser(null));
+        toast.success("Logged Out!");
+        navigate("/");
+        localStorage.clear();
+    }
+}
+
+export const getUser = async (userId) => {
+    try {
+        const response = await apiConnector("GET", userApi.GET_USER_API+userId, null);
+        if(response.data.error) {
+            throw new Error(response.data.message);
+        }
+        return response.data?.data;
+    } catch(err) {
+        console.log(err);
+    }
+}

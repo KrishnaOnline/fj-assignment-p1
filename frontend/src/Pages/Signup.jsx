@@ -1,8 +1,7 @@
 import { useState } from "react";
-import Input from "../../Components/Common/Input";
-import { signUp } from "../../services/operations/userApi";
-import { useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
+import Input from "../Components/Common/Input";
+import { signUp } from "../services/operations/userApi";
+import { Link, useNavigate } from "react-router-dom";
 
 function Signup() {
     const [data, setData] = useState({
@@ -47,6 +46,7 @@ function Signup() {
                     SignUp    
                 </button>
             </form>
+            <p className="mt-5">Already Registered?, <Link to={"/login"} className="text-blue-400 underline">Login</Link></p>
         </div>
     );
 }

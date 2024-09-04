@@ -14,6 +14,9 @@ const actorSchema = new mongoose.Schema({
         type: Date,
         required: true,
     },
+    image: {
+        type: String,
+    },
     bio: {
         type: String,
         required: true,

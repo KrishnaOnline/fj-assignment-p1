@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import Input from "../../Components/Common/Input";
-import { useNavigate } from "react-router-dom";
-import { login } from "../../services/operations/userApi";
+import { useState } from "react";
+import Input from "../Components/Common/Input";
+import { Link, useNavigate } from "react-router-dom";
+import { login } from "../services/operations/userApi";
 import { useDispatch } from "react-redux";
 
 function Login() {
@@ -42,6 +42,7 @@ function Login() {
                     Login   
                 </button>
             </form>
+            <p className="mt-5">Not Registered yet?, <Link to={"/signup"} className="text-blue-400 underline">SignUp</Link></p>
         </div>
     );
 }
