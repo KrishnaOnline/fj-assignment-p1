@@ -46,7 +46,7 @@ export const getMovie = async (movieId) => {
     }
 }
 
-export const updateMovie = async (data, movieId, token) => {
+export const updateMovie = async (data, movieId, token, navigate) => {
     const toastId = toast.loading("Updating Movie...");
     try {
         const response = await apiConnector("PUT", movieApi.UPDATE_MOVIE_API+movieId, data, {
@@ -55,6 +55,7 @@ export const updateMovie = async (data, movieId, token) => {
         if(response.data.error) {
             throw new Error(response.data.message);
         }
+        navigate("/");
         toast.dismiss(toastId);
         toast.success("Movie Updated!");
         return response.data?.data;

@@ -35,10 +35,10 @@ function Movie() {
                 {
                     token &&
                     <div className="flex max-sm:mt-3 items-center gap-5">
-                        <button className="text-green-500 p-2 flex gap-1 items-center">
+                        <Link to={`/update-movie/${movie?._id}`} className="text-green-500 p-2 flex gap-1 items-center">
                             <FiEdit className="text-3xl"/>
                             <p className="text-lg">Edit</p>
-                        </button>
+                        </Link>
                         <button onClick={handleDelete} className="text-red-500 p-2 flex gap-1 items-center">
                             <FiTrash2 className="text-3xl"/>
                             <p className="text-lg">Delete</p>

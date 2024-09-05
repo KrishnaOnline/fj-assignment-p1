@@ -9,6 +9,7 @@ import Movie from "./Pages/Movie";
 import Actor from "./Pages/Actor";
 import Producer from "./Pages/Producer";
 import AddMovie from "./Pages/AddMovie";
+import UpdateMovie from "./Pages/UpdateMovie";
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
                     <Route path="/actor/:actorId" element={<Actor/>}/>
                     <Route path="/producer/:producerId" element={<Producer/>}/>
                     <Route path="/add-movie" element={<AddMovie/>}/>
+                    <Route path="/update-movie/:movieId" element={<UpdateMovie/>}/>
                 </Routes>
             </div>
         </div>

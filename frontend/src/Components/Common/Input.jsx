@@ -7,7 +7,7 @@ function Input({onChangeHandle, fieldName, placeholder, width="300", value=""}) 
                 className={`bg-[#242424] border border-[#242424] rounded mt-[2px] p-2 w-[${width}px]`}
                 placeholder={placeholder}
                 onChange={onChangeHandle}
-                defaultValue={value}
+                defaultValue={value ? value : ""}
             />
         </label>
     );

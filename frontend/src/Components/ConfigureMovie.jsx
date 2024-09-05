@@ -1,29 +1,22 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import { getAllActors } from "../services/operations/actorApi";
 import { getAllProducers } from "../services/operations/producerApi";
 import Select from "react-select";
 import Input from "./Common/Input";
-import { createMovie } from "../services/operations/movieApi";
+import { createMovie, updateMovie } from "../services/operations/movieApi";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import BasicModal from "./Modal";
 
-function ConfigureMovie() {
+function ConfigureMovie({type, data, setData}) {
     const {token} = useSelector(state => state.auth);
-    const [data, setData] = useState({
-        name: "",
-        yearOfRelease: "",
-        plot: "",
-        poster: "",
-        trailer: "",
-        actors: [],
-        producer: "",
-    });
     const navigate = useNavigate();
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
     const [field, setField] = useState("");
+    const {movieId} = useParams();
 
     const [allActors, setAllActors] = useState([]);
     const [allProducers, setAllProducers] = useState([]);
@@ -53,8 +46,8 @@ function ConfigureMovie() {
         label: producer?.name
     }));
 
-    const selectedActors = actorOptions?.filter(opt => data.actors.includes(opt.value));
-    const selectedProducer = producerOptions?.find(opt => opt.value===data.producer);
+    const selectedActors = actorOptions?.filter(opt => data?.actors.includes(opt.value));
+    const selectedProducer = producerOptions?.find(opt => opt.value===data?.producer);
 
     const handleActorChange = (selected) => {
         setData(prevData => ({
@@ -73,21 +66,28 @@ function ConfigureMovie() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(data);
-        const response = await createMovie(data, token, navigate);
-        console.log(response);
+        if(type==="Add") {
+            const response = await createMovie(data, token, navigate);
+            console.log(response);
+        } else if(type==="Edit") {
+            const response = await updateMovie(data, movieId, token, navigate);
+            console.log(response);
+        }
     }
 
 	return (
         <div className="flex flex-col w-full mt-5 mb-10 items-center justify-center">
-            <p className="text-[30px] mb-8 text-app font-medium">Add Movie</p>
+            <p className="text-[30px] mb-8 text-app font-medium">{type} Movie</p>
             <form onSubmit={handleSubmit} className="flex flex-row max-sm:flex-col md:gap-10 gap-5 justify-between">
                 <div className="flex flex-col gap-4">
                     <Input
+                        value={data?.name}
                         fieldName={"Name"}
                         placeholder={"Enter Movie Name"}
                         onChangeHandle={e => setData({...data, name: e.target.value})}
                     />
                     <Input
+                        value={new Date(data?.yearOfRelease).getFullYear()}
                         fieldName={"Year of Release"}
                         placeholder={"Enter Year of Release"}
                         onChangeHandle={e => setData({...data, yearOfRelease: e.target.value})}
@@ -95,6 +95,7 @@ function ConfigureMovie() {
                     <label>
                         <p className="ml-1 text-lg">Plot</p>
                         <textarea
+                            defaultValue={data?.plot}
                             className="bg-[#242424] border border-[#242424] rounded mt-[2px] h-[300px] p-2 w-[300px]"
                             placeholder="Enter the Plot of the movie"
                             onChange={e => setData({...data, plot: e.target.value})}
@@ -103,11 +104,13 @@ function ConfigureMovie() {
                 </div>
                 <div className="flex flex-col gap-4">
                     <Input
+                        value={data?.poster}
                         fieldName={"Poster URL"}
                         placeholder={"Enter Valid Image URL"}
                         onChangeHandle={e => setData({...data, poster: e.target.value})}
                     />
                     <Input
+                        value={"https://www.youtube.com/watch?v="+data?.trailer}
                         fieldName={"Trailer Youtube URL"}
                         placeholder={"Enter Valid Youtube URL"}
                         onChangeHandle={e => setData({...data, trailer: e.target.value})}
