@@ -5,6 +5,7 @@ import Signup from "./Pages/Signup";
 import Login from "./Pages/Login";
 import Home from "./Pages/Home";
 import Navbar from "./Components/Navbar";
+import Movie from "./Pages/Movie";
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
                     <Route path="/" element={<Home/>}/>
                     <Route path="/signup" element={<Signup/>}/>
                     <Route path="/login" element={<Login/>}/>
+                    <Route path="/movie/:movieId" element={<Movie/>}/>
                 </Routes>
             </div>
         </div>

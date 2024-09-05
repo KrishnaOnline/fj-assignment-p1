@@ -7,14 +7,14 @@ const User = require("../models/User");
 
 const createMovie = async (req, res) => {
     try {
-        const {name, yearOfRelease, plot, poster, actors, producer} = req.body;
+        const {name, yearOfRelease, plot, poster, trailer, actors, producer} = req.body;
         if(!name || !yearOfRelease || !plot || !producer || !poster || !actors.length) {
             return res.status(403).json(
                 throwError(null, "Provide all the required fields")
             );
         }
         const newMovie = await Movie.create({
-            name, yearOfRelease, plot, poster, actors, producer,
+            name, yearOfRelease, plot, poster, trailer, actors, producer,
         });
         await User.findByIdAndUpdate(req.user.id, {
             $push: {movies: newMovie._id}

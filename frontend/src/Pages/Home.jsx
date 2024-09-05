@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import {useSelector} from "react-redux";
+import {Link} from "react-router-dom";
 import { getAllMovies } from "../services/operations/movieApi";
 
 function Home() {
@@ -18,8 +19,8 @@ function Home() {
         <div className="mt-16">
             <div className="flex flex-wrap justify-center gap-10">
                 {
-                    movies.map(m => (
-                        <div key={m._id} className="flex flex-col items-center border-2 border-gray-700 w-[280px] h-[430px] p-3 rounded-lg">
+                    movies?.map(m => (
+                        <Link to={`/movie/${m._id}`} key={m._id} className="flex flex-col items-center border-2 border-gray-700 w-[280px] h-[430px] p-3 rounded-lg">
                             <img
                                 className="h-[325px] w-[250px] rounded" 
                                 src={m?.poster}
@@ -39,7 +40,7 @@ function Home() {
                                 ))}
                                 <p className="text-gray-400">{" "}...</p>
                             </div> */}
-                        </div>
+                        </Link>
                     ))
                 }
             </div>

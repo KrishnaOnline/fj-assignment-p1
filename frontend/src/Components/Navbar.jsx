@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 function Navbar() {
     const {token} = useSelector(state => state?.auth);
+    const {user} = useSelector(state => state?.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const handleLogout = async () => {
@@ -21,7 +22,10 @@ function Navbar() {
                 {
                     token 
                     ?
-                    <button onClick={handleLogout} className="bg-red-600 p-[5px] px-[10px] rounded-md text-lg">Logout</button>
+                    <div className="flex items-center gap-4">
+                        <p className="text-lg">Hi, {user?.username}!</p>
+                        <button onClick={handleLogout} className="bg-red-600 p-[5px] px-[10px] rounded-md text-lg">Logout</button>
+                    </div>
                     :
                     <div className="flex gap-5 items-center justify-center">
                         <Link to={"/login"} className="bg-gray-700 p-[5px] px-[10px] text-lg rounded-md">Login</Link>

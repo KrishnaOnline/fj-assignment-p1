@@ -17,6 +17,9 @@ const movieSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    trailer: {
+        type: String,
+    },
     actors: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Actor",
