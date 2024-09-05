@@ -6,6 +6,7 @@ import { useState } from "react";
 import Input from "./Common/Input";
 import { useSelector } from "react-redux";
 import { createActor } from "../services/operations/actorApi";
+import { createProducer } from "../services/operations/producerApi";
 
 const style = {
 	position: "absolute",
@@ -21,10 +22,7 @@ const style = {
 	p: 4,
 };
 
-export default function BasicModal() {
-	const [open, setOpen] = useState(false);
-	const handleOpen = () => setOpen(true);
-	const handleClose = () => setOpen(false);
+export default function BasicModal({field, open, setOpen, handleOpen, handleClose}) {
     const {token} = useSelector(state => state.auth);
 
     const [data, setData] = useState({
@@ -50,26 +48,32 @@ export default function BasicModal() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await createActor(data, token);
-        console.log(response);
-        setOpen(false);
+        if(field==="Actor") {
+            const response = await createActor(data, token);
+            console.log(response);
+            setOpen(false);
+        } else if(field==="Producer") {
+            const response = await createProducer(data, token);
+            console.log(response);
+            setOpen(false);
+        }
     }
     console.log(data);
 
 	return (
 		<div>
-			<Button onClick={handleOpen}>Open modal</Button>
+			{/* <button onClick={handleOpen}>Open modal</button> */}
 			<Modal
 				open={open}
 				onClose={handleClose}
 			>
 				<Box sx={style} /*className="bg-black w-[400px] h-[400px] top-1/2 left-1/2"*/>
                     <div className="flex flex-col items-center justify-center">
-                        <p className="text-[20px] mb-1 text-app font-medium">Add Actor</p>
+                        <p className="text-[20px] mb-1 text-app font-medium">Add {field}</p>
                         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                             <Input
                                 fieldName={"Name"}
-                                placeholder={"Enter Actor name"}
+                                placeholder={`Enter ${field} name`}
                                 onChangeHandle={e => setData({...data, name: e.target.value})}
                             />
                             <label>
@@ -92,7 +96,7 @@ export default function BasicModal() {
                                 <p className="ml-1 text-lg">Bio</p>
                                 <textarea
                                     className="bg-[#242424] border border-[#242424] rounded mt-[2px] h-[100px] p-2 w-[300px]"
-                                    placeholder="Enter the Bio of the Actor"
+                                    placeholder={"Enter the Bio of the "+field}
                                     onChange={e => setData({...data, bio: e.target.value})}
                                 />
                             </label>

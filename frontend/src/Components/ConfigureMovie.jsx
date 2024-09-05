@@ -6,6 +6,7 @@ import Input from "./Common/Input";
 import { createMovie } from "../services/operations/movieApi";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import BasicModal from "./Modal";
 
 function ConfigureMovie() {
     const {token} = useSelector(state => state.auth);
@@ -19,6 +20,10 @@ function ConfigureMovie() {
         producer: "",
     });
     const navigate = useNavigate();
+	const [open, setOpen] = useState(false);
+	const handleOpen = () => setOpen(true);
+	const handleClose = () => setOpen(false);
+    const [field, setField] = useState("");
 
     const [allActors, setAllActors] = useState([]);
     const [allProducers, setAllProducers] = useState([]);
@@ -37,13 +42,13 @@ function ConfigureMovie() {
     useEffect(() => {
         fetchAllActors();
         fetchAllProducers();
-    }, []);
+    }, [open]);
 
-    const actorOptions = allActors.map(actor => ({
+    const actorOptions = allActors?.map(actor => ({
         value: actor?._id,
         label: actor?.name
     }));
-    const producerOptions = allProducers.map(producer => ({
+    const producerOptions = allProducers?.map(producer => ({
         value: producer?._id,
         label: producer?.name
     }));
@@ -110,7 +115,7 @@ function ConfigureMovie() {
                     <label>
                         <p className="ml-1 text-lg">Select Actors</p>
                         <Select
-                            className="text-black bg-gray-700 mt-[2px]"
+                            className="text-black bg-gray-700 mt-[2px] max-w-[300px]"
                             isMulti
                             options={actorOptions}
                             value={selectedActors}
@@ -118,20 +123,36 @@ function ConfigureMovie() {
                             placeholder="Select Actors"
                             isSearchable
                         />
+                        <button className="text-blue-400 pl-1 mt-1 underline" type="button" 
+                            onClick={() => {
+                                setField("Actor");
+                                setOpen(true);
+                            }
+                        }>
+                            Add Actor
+                        </button>
                     </label>
                     <label>
                         <p className="ml-1 text-lg">Select Producer</p>
                         <Select
-                            className="text-black bg-gray-700 mt-[2px]"
+                            className="text-black bg-gray-700 mt-[2px] max-w-[300px]"
                             options={producerOptions}
                             value={selectedProducer}
                             onChange={handleProducerChange}
                             placeholder="Select Producer"
                             isSearchable
                         />
+                        <button className="text-blue-400 pl-1 mt-1 underline" type="button" 
+                            onClick={() => {
+                                setField("Producer");
+                                setOpen(true);
+                            }
+                        }>
+                            Add Producer
+                        </button>
                     </label>
                     <button
-                        className="bg-app mt-10 w-full text-xl font-medium hover:opacity-90 p-2 text-black rounded"
+                        className="bg-app mt-8 w-full text-xl font-medium hover:opacity-90 p-2 text-black rounded"
                         type="submit"
                         onClick={handleSubmit}
                     >
@@ -139,6 +160,9 @@ function ConfigureMovie() {
                     </button>
                 </div>
             </form>
+            {
+                open && <BasicModal field={field} open={open} setOpen={setOpen} handleOpen={handleOpen} handleClose={handleClose}/>
+            }
         </div>
     );
 }
