@@ -17,19 +17,22 @@ function Home() {
 
 	return (
         <div className="mt-16">
-            <div className="flex flex-wrap justify-center gap-10">
+            <div className="flex flex-wrap justify-center gap-5">
                 {
                     movies?.map(m => (
-                        <Link to={`/movie/${m._id}`} key={m._id} className="flex flex-col items-center border-2 border-gray-700 w-[280px] h-[430px] p-3 rounded-lg">
+                        <Link to={`/movie/${m._id}`} key={m._id} className="flex flex-col items-center border-2 border-gray-700 w-[300px] h-[520px] max-sm:w-[90%] p-3 rounded-lg">
                             <img
-                                className="h-[325px] w-[250px] rounded" 
+                                className="/*h-[325px]*/ min-h-[65%] max-h-[65%] w-[270px] max-sm:w-[95%] rounded" 
                                 src={m?.poster}
                             />
-                            <p className="text-xl text-app mt-2">
-                                {m?.name.substring(0, 20)}{m?.name?.length>20 && "..."}
+                            <p className="text-xl max-sm:px-7 text-app mt-2 h-[12%] /*h-[60px]*/">
+                                {m?.name.substring(0, 30)}{m?.name?.length>20 && "..."}
                             </p>
-                            <p className="text-sm mt-1 text-gray-400">
+                            <p className="text-sm mt-2 max-sm:px-7 text-gray-400 h-[12%] /*h-[50px]*/">
                                 {m?.plot.substring(0, 67)}{m?.plot?.length>67 && "..."}
+                            </p>
+                            <p className="bg-gray-700 p-2 px-3 mt-0 rounded-full">
+                                Watch Trailer
                             </p>
                             {/* <p className="mt-1 text-[15px]">Cast:</p>
                             <div className="flex flex-wrap gap-2">

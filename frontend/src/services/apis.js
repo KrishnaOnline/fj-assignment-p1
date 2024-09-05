@@ -18,11 +18,11 @@ export const movieApi = {
 export const actorApi = {
     CREATE_ACTOR_API: BASE_URL+"/actors",
     GET_ALL_ACTORS_API: BASE_URL+"/actors",
-    GET_ACTOR_API: BASE_URL+"/actors",  // + actorId
+    GET_ACTOR_API: BASE_URL+"/actors/",  // + actorId
 }
 
 export const producerApi = {
     CREATE_PRODUCER_API: BASE_URL+"/producers",
     GET_ALL_PRODUCERS_API: BASE_URL+"/producers",
-    GET_PRODUCER_API: BASE_URL+"/producers",  // + producerId
+    GET_PRODUCER_API: BASE_URL+"/producers/",  // + producerId
 }

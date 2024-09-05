@@ -25,12 +25,12 @@ function Login() {
                 <div className="flex flex-col gap-4">
                     <Input
                         fieldName={"Username"}
-                        placeholder={"Create Username"}
+                        placeholder={"Enter Username"}
                         onChangeHandle={e => setData({...data, username: e.target.value})}
                     />
                     <Input
                         fieldName={"Password"}
-                        placeholder={"Create your Password"}
+                        placeholder={"Enter your Password"}
                         onChangeHandle={e => setData({...data, password: e.target.value})}
                     />
                 </div>

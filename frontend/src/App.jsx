@@ -6,19 +6,23 @@ import Login from "./Pages/Login";
 import Home from "./Pages/Home";
 import Navbar from "./Components/Navbar";
 import Movie from "./Pages/Movie";
+import Actor from "./Pages/Actor";
+import Producer from "./Pages/Producer";
 
 function App() {
 
 	return (
-		<div>
+		<div className="">
             <Navbar/>
-            <div className="max-w-[1280px] mx-auto">
+            <div className="max-w-[1280px] mx-auto overflow-auto">
                 <Routes>
                     {/* <Route path="/signup" element={<OpenRoute><Signup/></OpenRoute>}/> */}
                     <Route path="/" element={<Home/>}/>
                     <Route path="/signup" element={<Signup/>}/>
                     <Route path="/login" element={<Login/>}/>
                     <Route path="/movie/:movieId" element={<Movie/>}/>
+                    <Route path="/actor/:actorId" element={<Actor/>}/>
+                    <Route path="/producer/:producerId" element={<Producer/>}/>
                 </Routes>
             </div>
         </div>

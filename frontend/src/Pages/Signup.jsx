@@ -34,7 +34,7 @@ function Signup() {
                     />
                     <Input
                         fieldName={"Password"}
-                        placeholder={"Create your Password"}
+                        placeholder={"Create Password"}
                         onChangeHandle={e => setData({...data, password: e.target.value})}
                     />
                 </div>
