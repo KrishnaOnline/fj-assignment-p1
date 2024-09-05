@@ -8,6 +8,7 @@ import Navbar from "./Components/Navbar";
 import Movie from "./Pages/Movie";
 import Actor from "./Pages/Actor";
 import Producer from "./Pages/Producer";
+import ConfigureMovie from "./Components/ConfigureMovie";
 
 function App() {
 
@@ -17,7 +18,7 @@ function App() {
             <div className="max-w-[1280px] mx-auto overflow-auto">
                 <Routes>
                     {/* <Route path="/signup" element={<OpenRoute><Signup/></OpenRoute>}/> */}
-                    <Route path="/" element={<Home/>}/>
+                    <Route path="/" element={<ConfigureMovie/>}/>
                     <Route path="/signup" element={<Signup/>}/>
                     <Route path="/login" element={<Login/>}/>
                     <Route path="/movie/:movieId" element={<Movie/>}/>

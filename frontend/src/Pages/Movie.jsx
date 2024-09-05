@@ -20,9 +20,12 @@ function Movie() {
     }, [movieId]);
 
 	return (
-        <div className="flex mb-20 w-full items-center max-sm:justify-center mt-10 flex-wrap gap-5 max-sm:gap-0">
+        <div className="flex mb-10 w-full items-center max-sm:justify-center mt-10 flex-wrap gap-5 max-sm:gap-0">
             <div className="flex flex-col md:flex-row items-center justify-between px-3 w-full max-sm:w-full">
-                <p className="text-5xl">{movie?.name}</p>
+                <div className="">
+                    <p className="text-5xl mb-2">{movie?.name}</p>
+                    <p className="text-gray-300 pl-1">• {new Date(movie?.yearOfRelease).getFullYear()}</p>
+                </div>
                 {
                     token &&
                     <div className="flex max-sm:mt-3 items-center gap-5">
@@ -45,24 +48,35 @@ function Movie() {
                 >
                 </iframe>
             </div>
-            <div className="w-full flex flex-row max-sm:flex-col gap-3 max-sm:gap-5 mt-3 px-3 border-2 border-gray-700 p-3 py-4 pb-5 rounded-lg max-sm:w-full">
-                <div className="w-[75%] px-3 max-sm:w-[100%] md:border-r-2 border-gray-700">
-                    <p className="text-3xl mb-3">Actors</p>
-                    <div className="flex flex-wrap">
+            <div className="px-3 w-full border-b pb-3 border-gray-700">
+                <p className="text-2xl">Plot:</p>
+                <p className="text-gray-400">{movie?.plot}</p>
+            </div>
+            <div className="w-full">
+                <div className="flex max-sm:pt-3 px-3 border-b mb-4 pb-4 border-gray-700 gap-10">
+                    <p className="text-lg font-semibold">Cast :</p>
+                    <div className="flex gap-3 flex-wrap items-center">
                         {
                             movie?.actors?.map(a => (
-                                <Link to={`/actor/${a._id}`} className="bg-gray-700 p-3 px-4 rounded-full" key={a._id}>
-                                    {a?.name}
-                                </Link>
+                                <div key={a?._id} className="flex items-center gap-2">
+                                    <p>•</p>
+                                    <Link to={`/actor/${a._id}`} className="text-lg text-blue-500 underline">
+                                        {a?.name}
+                                    </Link>
+                                </div>
                             ))
                         }
                     </div>
                 </div>
-                <div className="w-[25%] px-3">
-                    <p className="text-3xl mb-5">Producer</p>
-                    <Link to={`/producer/${movie?.producer?._id}`} className="bg-gray-700 p-3 px-4 w-full rounded-full">
-                        {movie?.producer?.name}
-                    </Link>
+                <div className="flex px-3 border-b-0 pb-4 border-gray-700 gap-10">
+                    <p className="text-lg font-semibold">Producer :</p>
+                    <div className="flex gap-3 flex-wrap items-center">
+                        <div className="flex items-center gap-2">
+                            <Link to={`/producer/${movie?.producer?._id}`} className="text-lg text-blue-500 underline">
+                                {movie?.producer?.name}
+                            </Link>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

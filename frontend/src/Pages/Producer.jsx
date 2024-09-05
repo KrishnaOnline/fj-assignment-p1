@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getProducer } from "../services/operations/producerApi";
 import Individual from "../Components/Individual";
@@ -18,7 +18,7 @@ function Producer() {
 
 	return (
         <div>
-            <Individual data={producer}/>
+            <Individual data={producer} role={"Producer"}/>
         </div>
     );
 }

@@ -19,7 +19,7 @@ function Actor() {
 
 	return (
         <div>
-            <Individual data={actor}/>
+            <Individual data={actor} role={"Actor"}/>
         </div>
     );
 }
