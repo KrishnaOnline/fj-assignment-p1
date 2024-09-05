@@ -11,8 +11,8 @@ export const movieApi = {
     CREATE_MOVIE_API: BASE_URL+"/movies",
     GET_MOVIE_API: BASE_URL+"/movies/",  // + movieId
     GET_ALL_MOVIES_API: BASE_URL+"/movies",
-    UPDATE_MOVIE_API: BASE_URL+"/movies",  // + movieId
-    DELETE_MOVIE_API: BASE_URL+"/movies",  // + movieId
+    UPDATE_MOVIE_API: BASE_URL+"/movies/",  // + movieId
+    DELETE_MOVIE_API: BASE_URL+"/movies/",  // + movieId
 }
 
 export const actorApi = {

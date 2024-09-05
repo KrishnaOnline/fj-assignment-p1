@@ -32,7 +32,7 @@ const createMovie = async (req, res) => {
             );
         }
         const newMovie = await Movie.create({
-            name, yearOfRelease, plot, poster, trailer, actors, producer,
+            name, yearOfRelease, plot, poster, trailer: getYtVideoId(trailer), actors, producer,
         });
         await User.findByIdAndUpdate(req.user.id, {
             $push: {movies: newMovie._id}

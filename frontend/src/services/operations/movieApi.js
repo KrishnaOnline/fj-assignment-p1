@@ -2,7 +2,7 @@ import toast from "react-hot-toast";
 import { apiConnector } from "../apiConnector";
 import { movieApi } from "../apis";
 
-export const createMovie = async (data, token) => {
+export const createMovie = async (data, token, navigate) => {
     const toastId = toast.loading("Adding Movie...");
     try {
         const response = await apiConnector("POST", movieApi.CREATE_MOVIE_API, data, {
@@ -11,6 +11,7 @@ export const createMovie = async (data, token) => {
         if(response.data.error) {
             throw new Error(response.data.message);
         }
+        navigate("/");
         toast.dismiss(toastId);
         toast.success("Movie Added!");
         return response.data?.data;
@@ -63,7 +64,7 @@ export const updateMovie = async (data, movieId, token) => {
     }
 }
 
-export const deleteMovie = async (movieId, token) => {
+export const deleteMovie = async (movieId, token, navigate) => {
     const toastId = toast.loading("Deleting Movie...");
     try {
         const response = await apiConnector("DELETE", movieApi.DELETE_MOVIE_API+movieId, null, {
@@ -72,6 +73,7 @@ export const deleteMovie = async (movieId, token) => {
         if(response.data.error) {
             throw new Error(response.data.message);
         }
+        navigate("/");
         toast.dismiss(toastId);
         toast.success("Movie Deleted!");
     } catch(err) {

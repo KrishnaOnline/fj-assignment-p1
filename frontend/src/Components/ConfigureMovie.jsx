@@ -3,8 +3,12 @@ import { getAllActors } from "../services/operations/actorApi";
 import { getAllProducers } from "../services/operations/producerApi";
 import Select from "react-select";
 import Input from "./Common/Input";
+import { createMovie } from "../services/operations/movieApi";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function ConfigureMovie() {
+    const {token} = useSelector(state => state.auth);
     const [data, setData] = useState({
         name: "",
         yearOfRelease: "",
@@ -14,6 +18,7 @@ function ConfigureMovie() {
         actors: [],
         producer: "",
     });
+    const navigate = useNavigate();
 
     const [allActors, setAllActors] = useState([]);
     const [allProducers, setAllProducers] = useState([]);
@@ -23,7 +28,6 @@ function ConfigureMovie() {
         console.log(response);
         setAllActors(response);
     }
-
     const fetchAllProducers = async () => {
         const response = await getAllProducers();
         console.log(response);
@@ -47,10 +51,6 @@ function ConfigureMovie() {
     const selectedActors = actorOptions?.filter(opt => data.actors.includes(opt.value));
     const selectedProducer = producerOptions?.find(opt => opt.value===data.producer);
 
-    const handleSubmit = async () => {
-        console.log(data);
-    }
-
     const handleActorChange = (selected) => {
         setData(prevData => ({
             ...prevData,
@@ -65,11 +65,17 @@ function ConfigureMovie() {
     }
 
     console.log(data);
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        console.log(data);
+        const response = await createMovie(data, token, navigate);
+        console.log(response);
+    }
 
 	return (
-        <div className="flex flex-col w-full items-center justify-center">
-            <p className="text-[30px] mb-1 text-app font-medium">Add Movie</p>
-            <form onSubmit={handleSubmit} className="flex flex-row gap-10 justify-between">
+        <div className="flex flex-col w-full mt-5 mb-10 items-center justify-center">
+            <p className="text-[30px] mb-8 text-app font-medium">Add Movie</p>
+            <form onSubmit={handleSubmit} className="flex flex-row max-sm:flex-col md:gap-10 gap-5 justify-between">
                 <div className="flex flex-col gap-4">
                     <Input
                         fieldName={"Name"}
@@ -86,6 +92,7 @@ function ConfigureMovie() {
                         <textarea
                             className="bg-[#242424] border border-[#242424] rounded mt-[2px] h-[300px] p-2 w-[300px]"
                             placeholder="Enter the Plot of the movie"
+                            onChange={e => setData({...data, plot: e.target.value})}
                         />
                     </label>
                 </div>
@@ -123,6 +130,13 @@ function ConfigureMovie() {
                             isSearchable
                         />
                     </label>
+                    <button
+                        className="bg-app mt-10 w-full text-xl font-medium hover:opacity-90 p-2 text-black rounded"
+                        type="submit"
+                        onClick={handleSubmit}
+                    >
+                        Submit   
+                    </button>
                 </div>
             </form>
         </div>

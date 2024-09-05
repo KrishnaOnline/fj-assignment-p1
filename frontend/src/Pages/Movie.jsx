@@ -1,18 +1,24 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
-import { getMovie } from "../services/operations/movieApi";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { deleteMovie, getMovie } from "../services/operations/movieApi";
 import { FiEdit, FiTrash2 } from "react-icons/fi";
 
 function Movie() {
     const {movieId} = useParams();
     const {token} = useSelector(state => state?.auth);
     const [movie, setMovie] = useState(null);
+    const navigate = useNavigate();
 
     const fetchMovieById = async () => {
         const response = await getMovie(movieId);
         console.log(response);
         setMovie(response);
+    }
+
+    const handleDelete = async () => {
+        console.log(movie?._id);
+        await deleteMovie(movie?._id, token, navigate);
     }
 
     useEffect(() => {
@@ -33,7 +39,7 @@ function Movie() {
                             <FiEdit className="text-3xl"/>
                             <p className="text-lg">Edit</p>
                         </button>
-                        <button className="text-red-500 p-2 flex gap-1 items-center">
+                        <button onClick={handleDelete} className="text-red-500 p-2 flex gap-1 items-center">
                             <FiTrash2 className="text-3xl"/>
                             <p className="text-lg">Delete</p>
                         </button>
@@ -44,7 +50,7 @@ function Movie() {
                 <img src={movie?.poster} alt="poster" className="rounded-xl p-2 w-[25%] h-full max-sm:w-full"/>
                 <iframe 
                     className="w-[75%] max-sm:w-full max-sm:h-[300px] h-[450px] md:border border-gray-700 rounded"
-                    src={`https://www.youtube.com/embed/${movie?.trailer}?autoplay=0&mute=1`}
+                    src={`https://www.youtube.com/embed/${movie?.trailer}?autoplay=0`}
                 >
                 </iframe>
             </div>
