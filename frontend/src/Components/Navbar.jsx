@@ -24,6 +24,7 @@ function Navbar() {
                     ?
                     <div className="flex items-center gap-4">
                         <p className="text-lg">Hi, {user?.username}!</p>
+                        <Link to={"/add-movie"} className="bg-gray-700  p-[5px] px-[10px] rounded-md text-lg">Add Movie</Link>
                         <button onClick={handleLogout} className="bg-red-600 p-[5px] px-[10px] rounded-md text-lg">Logout</button>
                     </div>
                     :

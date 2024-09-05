@@ -9,6 +9,7 @@ import Movie from "./Pages/Movie";
 import Actor from "./Pages/Actor";
 import Producer from "./Pages/Producer";
 import ConfigureMovie from "./Components/ConfigureMovie";
+import AddMovie from "./Pages/AddMovie";
 
 function App() {
 
@@ -18,12 +19,13 @@ function App() {
             <div className="max-w-[1280px] mx-auto overflow-auto">
                 <Routes>
                     {/* <Route path="/signup" element={<OpenRoute><Signup/></OpenRoute>}/> */}
-                    <Route path="/" element={<ConfigureMovie/>}/>
+                    <Route path="/" element={<Home/>}/>
                     <Route path="/signup" element={<Signup/>}/>
                     <Route path="/login" element={<Login/>}/>
                     <Route path="/movie/:movieId" element={<Movie/>}/>
                     <Route path="/actor/:actorId" element={<Actor/>}/>
                     <Route path="/producer/:producerId" element={<Producer/>}/>
+                    <Route path="/add-movie" element={<AddMovie/>}/>
                 </Routes>
             </div>
         </div>

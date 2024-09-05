@@ -4,13 +4,31 @@ const Actor = require("../models/Actor");
 const Movie = require("../models/Movie");
 const Producer = require("../models/Producer");
 const User = require("../models/User");
+const { validateImage, getYtVideoId } = require("../utils/helper");
+
+const today = new Date();
 
 const createMovie = async (req, res) => {
     try {
         const {name, yearOfRelease, plot, poster, trailer, actors, producer} = req.body;
-        if(!name || !yearOfRelease || !plot || !producer || !poster || !actors.length) {
+        if(!name || !yearOfRelease || !plot || !producer || !poster || !trailer || !actors.length) {
             return res.status(403).json(
                 throwError(null, "Provide all the required fields")
+            );
+        }
+        if(!validateImage(poster)) {
+            return res.status(403).json(
+                throwError(null, "Provide Valid Image Url")
+            );
+        }
+        if(/*trailer &&*/ !getYtVideoId(trailer)) {
+            return res.status(403).json(
+                throwError(null, "Provide Valid Youtube Url")
+            );
+        }
+        if(yearOfRelease>today) {
+            return res.status(403).json(
+                throwError(null, "Enter Valid Year")
             );
         }
         const newMovie = await Movie.create({
@@ -70,6 +88,11 @@ const updateMovie = async (req, res) => {
     try {
         const {id} = req.params;
         const updates = req.body;
+        if(updates.yearOfRelease && updates.yearOfRelease>today) {
+            return res.status(403).json(
+                throwError(null, "Enter Valid Year")
+            );
+        }
         const updatedMovie = await Movie.findByIdAndUpdate(id, updates, {new: true});
         if(!updatedMovie) {
             return res.status(404).json(
