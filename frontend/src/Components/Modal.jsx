@@ -1,5 +1,5 @@
+/* eslint-disable react/prop-types */
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import Select from "react-select";
 import { useState } from "react";
@@ -62,7 +62,6 @@ export default function BasicModal({field, open, setOpen, handleOpen, handleClos
 
 	return (
 		<div>
-			{/* <button onClick={handleOpen}>Open modal</button> */}
 			<Modal
 				open={open}
 				onClose={handleClose}
@@ -83,7 +82,7 @@ export default function BasicModal({field, open, setOpen, handleOpen, handleClos
                                     options={genderOptions}
                                     value={selectedGender}
                                     onChange={handleGenderChange}
-                                    placeholder="Select Gender"
+                                    placeholder={`Select ${field} gender`}
                                     isSearchable
                                 />
                             </label>
@@ -96,7 +95,7 @@ export default function BasicModal({field, open, setOpen, handleOpen, handleClos
                                 <p className="ml-1 text-lg">Bio</p>
                                 <textarea
                                     className="bg-[#242424] border border-[#242424] rounded mt-[2px] h-[100px] p-2 w-[300px]"
-                                    placeholder={"Enter the Bio of the "+field}
+                                    placeholder={"Enter the bio of the "+field}
                                     onChange={e => setData({...data, bio: e.target.value})}
                                 />
                             </label>

@@ -1,5 +1,4 @@
-import React from "react";
-
+/* eslint-disable react/prop-types */
 function Input({onChangeHandle, fieldName, placeholder, width="300", value=""}) {
 	return (
         <label>

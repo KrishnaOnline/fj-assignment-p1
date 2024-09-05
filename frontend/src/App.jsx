@@ -8,7 +8,6 @@ import Navbar from "./Components/Navbar";
 import Movie from "./Pages/Movie";
 import Actor from "./Pages/Actor";
 import Producer from "./Pages/Producer";
-import ConfigureMovie from "./Components/ConfigureMovie";
 import AddMovie from "./Pages/AddMovie";
 
 function App() {
