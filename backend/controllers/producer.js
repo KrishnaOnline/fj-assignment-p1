@@ -5,7 +5,7 @@ const Producer = require("../models/Producer");
 const createProducer = async (req, res) => {
     try {
         const {name, gender, dateOfBirth, bio, movies} = req.body;
-        if(!name || !gender || !movies) {
+        if(!name || !gender /*|| !movies*/) {
             return res.status(403).json(
                 throwError(null, "Provide all the reqruired fields")
             );

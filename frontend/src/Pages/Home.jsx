@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import {useSelector} from "react-redux";
 import { getAllMovies } from "../services/operations/movieApi";
 import MovieCard from "../Components/MovieCard";
+import BasicModal from "../Components/Modal";
 
 function Home() {
     const [movies, setMovies] = useState([]);
@@ -17,6 +18,7 @@ function Home() {
 
 	return (
         <div className="mt-16">
+            <BasicModal/>
             <div className="flex flex-wrap max-sm:justify-center /*justify-center*/ gap-5">
                 {
                     movies?.map(m => (

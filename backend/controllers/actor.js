@@ -4,14 +4,14 @@ const Actor = require("../models/Actor");
 
 const createActor = async (req, res) => {
     try {
-        const {name, gender, dateOfBirth, image, bio, movies} = req.body;
-        if(!name || !gender || !dateOfBirth) {
+        const {name, gender, dateOfBirth, bio, movies} = req.body;
+        if(!name || !gender /*|| !dateOfBirth*/) {
             return res.status(403).json(
                 throwError(null, "Provide all the required fields")
             );
         }
         const newActor = await Actor.create({
-            name, gender, dateOfBirth, image, bio, movies,
+            name, gender, dateOfBirth, bio, movies,
         });
         return res.status(201).json(
             fetchResponse(newActor, "Actor created!")

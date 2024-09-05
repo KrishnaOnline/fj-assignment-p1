@@ -8,11 +8,11 @@ function MovieCard({movie}) {
                 className="/*h-[325px]*/ min-h-[65%] max-h-[65%] w-[270px] max-sm:w-[95%] rounded" 
                 src={movie?.poster}
             />
-            <p className="text-xl max-sm:px-7 text-app mt-2 h-[12%] /*h-[60px]*/">
+            <p className="text-2xl flex items-center max-sm:px-7 text-app mt-2 h-[12%] /*h-[60px]*/">
                 {movie?.name?.substring(0, 30)}{movie?.name?.length>20 && "..."}
             </p>
             <p className="text-sm mt-2 max-sm:px-7 text-gray-400 h-[12%] /*h-[50px]*/">
-                {movie?.plot.substring(0, 67)}{movie?.plot?.length>67 && "..."}
+                {movie?.plot.substring(0, 70)}{movie?.plot?.length>70 && "..."}
             </p>
             <p className="bg-gray-700 p-2 px-3 mt-0 rounded-full">
                 Watch Trailer
