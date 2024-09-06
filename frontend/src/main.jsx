@@ -12,7 +12,7 @@ const store = configureStore({
 });
 
 createRoot(document.getElementById("root")).render(
-	// <StrictMode>
+	<StrictMode>
 		<Provider store={store}>
             <BrowserRouter>
                 <App />
@@ -31,5 +31,5 @@ createRoot(document.getElementById("root")).render(
                 />
             </BrowserRouter>
         </Provider>
-	// </StrictMode>
+	</StrictMode>
 );
