@@ -8,6 +8,7 @@ function Individual({data, role}) {
                 <p className="text-4xl text-app">{data?.name} <span className="text-lg text-gray-400">({role}, {data?.gender})</span></p>
                 <p className="text-gray-300 text-base">{data?.bio}</p>
             </div>
+            <p className="text-2xl underline">Movies Associated:</p>
             <div className="mt-7 flex flex-wrap max-sm:justify-center /*justify-center*/ gap-5">
                 {
                     data?.movies?.map(m => (
