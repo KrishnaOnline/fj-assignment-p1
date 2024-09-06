@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import {useSelector} from "react-redux";
 import { getAllMovies } from "../services/operations/movieApi";
 import MovieCard from "../Components/MovieCard";
-import BasicModal from "../Components/Modal";
 import { Link } from "react-router-dom";
 
 function Home() {
