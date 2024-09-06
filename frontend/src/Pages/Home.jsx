@@ -18,13 +18,15 @@ function Home() {
     }, []);
 
 	return (
-        <div className="mt-16">
-            <BasicModal/>
-            <div className="flex flex-wrap max-sm:justify-center /*justify-center*/ gap-5">
+        <div className="mt-8">
+            <Link to={"/add-movie"} className="bg-green-600 p-2 rounded-lg text-black text-lg">
+                Create new Movie
+            </Link>
+            <div className="flex mt-10 flex-wrap max-sm:justify-center /*justify-center*/ gap-5">
                 {
                     movies?.length===0
                     ?
-                    <div className="flex gap-1 text-lg">
+                    <div className="flex px-10 gap-1 text-lg">
                         <p>No Movies to display, </p>
                         <Link className="underline text-blue-500" to={"/add-movie"}>Create One?</Link>
                     </div>

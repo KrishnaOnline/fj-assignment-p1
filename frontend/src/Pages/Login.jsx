@@ -17,6 +17,14 @@ function Login() {
         const response = await dispatch(login(data, navigate));
         console.log(response);
     }
+    const handleGuestLogin = async () => {
+        // e.preventDefault();
+        const response = await dispatch(login({
+            username: "testuser", 
+            password: "123456"
+        }, navigate));
+        console.log(response);
+    }
 
 	return (
         <div className="mt-10 flex flex-col items-center justify-center">
@@ -34,13 +42,23 @@ function Login() {
                         onChangeHandle={e => setData({...data, password: e.target.value})}
                     />
                 </div>
-                <button
-                    className="bg-app w-full text-xl font-medium hover:opacity-90 p-2 text-black rounded"
-                    type="submit"
-                    onClick={handleSubmit}
-                >
-                    Login   
-                </button>
+                <div className="w-full flex flex-col gap-3">
+                    <button
+                        className="bg-app w-full text-xl font-medium hover:opacity-90 p-2 text-black rounded"
+                        type="submit"
+                        onClick={handleSubmit}
+                    >
+                        Login   
+                    </button>
+                    <div className="text-center">(OR)</div>
+                    <button
+                        className="bg-app w-full text-xl font-medium hover:opacity-90 p-2 text-black rounded"
+                        type="button"
+                        onClick={handleGuestLogin}
+                    >
+                        Guest Login   
+                    </button>
+                </div>
             </form>
             <p className="mt-5">Not Registered yet?, <Link to={"/signup"} className="text-blue-400 underline">SignUp</Link></p>
         </div>

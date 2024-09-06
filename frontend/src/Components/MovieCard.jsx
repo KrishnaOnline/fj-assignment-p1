@@ -43,15 +43,6 @@ function MovieCard({movie}) {
                     Login to Edit
                 </Link>
             }
-            {/* <p className="mt-1 text-[15px]">Cast:</p>
-            <div className="flex flex-wrap gap-2">
-                {movie?.actors?.slice(0, 4)?.map(a => (
-                    <p key={a._id} className="text-sm p-1 px-2 rounded-full bg-gray-700 w-fit">
-                        {a?.name}
-                    </p>
-                ))}
-                <p className="text-gray-400">{" "}...</p>
-            </div> */}
         </Link>
     );
 }

@@ -22,7 +22,7 @@ const style = {
 	p: 4,
 };
 
-export default function BasicModal({field, open, setOpen, handleOpen, handleClose}) {
+export default function BasicModal({field, open, setOpen, handleClose}) {
     const {token} = useSelector(state => state.auth);
 
     const [data, setData] = useState({
