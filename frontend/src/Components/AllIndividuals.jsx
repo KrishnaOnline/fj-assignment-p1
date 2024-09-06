@@ -5,7 +5,7 @@ function AllIndividuals({data, role}) {
     console.log(data);
 	return (
         <div className="mt-5 mb-20 flex flex-col flex-wrap">
-            <div className="flex flex-col flex-wrap gap-3 /*border-b border-gray-700*/ pb-3">
+            <div className="pl-5 flex flex-col flex-wrap gap-3 /*border-b border-gray-700*/ pb-3">
                 <p className="text-4xl text-app">{role}s</p>
             </div>
             <div className="flex flex-wrap mt-5 gap-5 justify-start w-full mx-auto">
