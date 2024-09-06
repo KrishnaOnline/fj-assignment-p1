@@ -11,7 +11,7 @@ function UpdateMovie() {
         plot: "",
         poster: "",
         trailer: "",
-        actors: [],
+        actors: null,
         producer: "",
     });
 

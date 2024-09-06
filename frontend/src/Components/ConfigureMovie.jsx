@@ -35,7 +35,7 @@ function ConfigureMovie({type, data, setData}) {
     useEffect(() => {
         fetchAllActors();
         fetchAllProducers();
-    }, [open]);
+    }, [open, type]);
 
     const actorOptions = allActors?.map(actor => ({
         value: actor?._id,
@@ -46,20 +46,37 @@ function ConfigureMovie({type, data, setData}) {
         label: producer?.name
     }));
 
-    const selectedActors = actorOptions?.filter(opt => data?.actors.includes(opt.value));
-    const selectedProducer = producerOptions?.find(opt => opt.value===data?.producer);
-
     const handleActorChange = (selected) => {
-        setData(prevData => ({
-            ...prevData,
-            actors: selected ? selected?.map(opt => opt.value) : []
-        }));
+        if(type==="Edit") {
+            setData(prevData => ({
+                ...prevData,
+                actors: selected ? selected.map(opt => ({
+                    _id: opt.value,
+                    name: opt.label
+                })) : []
+            }));
+        } else if(type==="Add") {
+            setData(prevData => ({
+                ...prevData,
+                actors: selected ? selected?.map(opt => opt.value) : []
+            }));
+        }
     }
     const handleProducerChange = (selected) => {
-        setData(prevData => ({
-            ...prevData,
-            producer: selected ? selected.value : ""
-        }));
+        if(type==="Edit") {
+            setData(prevData => ({
+                ...prevData,
+                producer: selected ? { 
+                    _id: selected.value,
+                    name: selected.label
+                } : null
+            }));
+        } else if(type==="Add") {
+            setData(prevData => ({
+                ...prevData,
+                producer: selected ? selected.value : ""
+            }));
+        }
     }
 
     console.log(data);
@@ -73,6 +90,23 @@ function ConfigureMovie({type, data, setData}) {
             const response = await updateMovie(data, movieId, token, navigate);
             console.log(response);
         }
+    }
+
+    let selectedActors = [];
+    let selectedProducer = [];
+
+    if(type==="Edit") {
+        selectedActors = data?.actors?.map(actor => ({
+            value: actor?._id,
+            label: actor?.name,
+        }));
+        selectedProducer = {
+            value: data?.producer?._id,
+            label: data?.producer?.name,
+        }
+    } else if(type==="Add") {
+        selectedActors = actorOptions?.filter(opt => data?.actors.includes(opt.value));
+        selectedProducer = producerOptions?.find(opt => opt.value===data?.producer);
     }
 
 	return (
@@ -96,7 +130,7 @@ function ConfigureMovie({type, data, setData}) {
                         <p className="ml-1 text-lg">Plot</p>
                         <textarea
                             defaultValue={data?.plot}
-                            className="bg-[#242424] border border-[#242424] rounded mt-[2px] h-[300px] p-2 w-[300px]"
+                            className="bg-[#242424] border border-[#242424] rounded mt-[2px] h-[280px] p-2 w-[300px]"
                             placeholder="Enter the Plot of the movie"
                             onChange={e => setData({...data, plot: e.target.value})}
                         />
@@ -109,8 +143,12 @@ function ConfigureMovie({type, data, setData}) {
                         placeholder={"Enter Valid Image URL"}
                         onChangeHandle={e => setData({...data, poster: e.target.value})}
                     />
+                    {console.log(data?.trailer)}
                     <Input
-                        value={"https://www.youtube.com/watch?v="+data?.trailer}
+                        value={ type === "Edit"
+                            ? (data?.trailer ? `https://www.youtube.com/watch?v=${data?.trailer}` : '')
+                            : data?.trailer
+                        }
                         fieldName={"Trailer Youtube URL"}
                         placeholder={"Enter Valid Youtube URL"}
                         onChangeHandle={e => setData({...data, trailer: e.target.value})}
@@ -132,7 +170,7 @@ function ConfigureMovie({type, data, setData}) {
                                 setOpen(true);
                             }
                         }>
-                            Add Actor
+                            Add new Actor
                         </button>
                     </label>
                     <label>
@@ -151,7 +189,7 @@ function ConfigureMovie({type, data, setData}) {
                                 setOpen(true);
                             }
                         }>
-                            Add Producer
+                            Add new Producer
                         </button>
                     </label>
                     <button
