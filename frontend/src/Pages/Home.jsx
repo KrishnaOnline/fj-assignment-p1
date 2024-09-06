@@ -18,13 +18,21 @@ function Home() {
 
 	return (
         <div className="mt-8 mb-10">
-            <div className="flex items-center gap-4 px-10">
-                <Link to={"/add-movie"} className="bg-green-600 p-[5px] px-[10px] border-2 border-black rounded-lg text-black text-lg">
-                    Create new Movie
-                </Link>
-                <div className="flex items-center justify-center gap-3">
-                    <Link className="text-lg border-2 border-gray-700 p-[5px] px-[10px] rounded" to={"/actors"}>All Actors</Link>
-                    <Link className="text-lg border-2 border-gray-700 p-[5px] px-[10px] rounded" to={"/producers"}>All Producers</Link>
+            <div className="flex justify-between items-center">
+                <div className="flex items-center gap-4 px-10">
+                    <Link to={"/add-movie"} className="bg-green-600 p-[5px] px-[10px] border-2 border-black rounded-lg text-black text-lg">
+                        Create new Movie
+                    </Link>
+                    <div className="flex items-center justify-center gap-3">
+                        <Link className="text-lg border-2 border-gray-700 p-[5px] px-[10px] rounded" to={"/actors"}>All Actors</Link>
+                        <Link className="text-lg border-2 border-gray-700 p-[5px] px-[10px] rounded" to={"/producers"}>All Producers</Link>
+                    </div>
+                </div>
+                <div className="flex items-center gap-2">
+                    <p className="text-lg underline pr-3">Profiles: </p>
+                    <Link className="text-lg border-2 border-gray-700 bg-[#1E3A8A] p-[5px] px-[10px] rounded" target="_blank" to={"https://krishnavamshi-portfolio.netlify.app/"}>Portfolio</Link>
+                    <Link className="text-lg border-2 border-gray-700 bg-[#242938] p-[5px] px-[10px] rounded" target="_blank" to={"https://github.com/KrishnaOnline"}>GitHub</Link>
+                    <Link className="text-lg border-2 border-gray-700 bg-[#0077B5] p-[5px] px-[10px] rounded" target="_blank" to={"https://www.linkedin.com/in/krishna-vamshi-kusuma-11717b213/"}>LinkedIn</Link>
                 </div>
             </div>
             <div className="flex mt-10 flex-wrap max-sm:justify-center /*justify-center*/ gap-5">
