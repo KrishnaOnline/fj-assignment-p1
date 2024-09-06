@@ -1,6 +1,5 @@
 import { Route, Routes } from "react-router-dom";
 import "./index.css";
-// import OpenRoute from "./Components/AuthRoutes/OpenRoute";
 import Signup from "./Pages/Signup";
 import Login from "./Pages/Login";
 import Home from "./Pages/Home";
@@ -12,6 +11,8 @@ import AddMovie from "./Pages/AddMovie";
 import UpdateMovie from "./Pages/UpdateMovie";
 import AllActors from "./Pages/AllActors";
 import AllProducers from "./Pages/AllProducers";
+import OpenRoute from "./Components/AuthRoutes/OpenRoute";
+import PrivateRoute from "./Components/AuthRoutes/PrivateRoute";
 
 function App() {
 
@@ -20,15 +21,14 @@ function App() {
             <Navbar/>
             <div className="max-w-[1280px] mx-auto overflow-auto">
                 <Routes>
-                    {/* <Route path="/signup" element={<OpenRoute><Signup/></OpenRoute>}/> */}
                     <Route path="/" element={<Home/>}/>
-                    <Route path="/signup" element={<Signup/>}/>
-                    <Route path="/login" element={<Login/>}/>
+                    <Route path="/signup" element={<OpenRoute><Signup/></OpenRoute>}/>
+                    <Route path="/login" element={<OpenRoute><Login/></OpenRoute>}/>
                     <Route path="/movie/:movieId" element={<Movie/>}/>
                     <Route path="/actor/:actorId" element={<Actor/>}/>
                     <Route path="/producer/:producerId" element={<Producer/>}/>
-                    <Route path="/add-movie" element={<AddMovie/>}/>
-                    <Route path="/update-movie/:movieId" element={<UpdateMovie/>}/>
+                    <Route path="/add-movie" element={<PrivateRoute><AddMovie/></PrivateRoute>}/>
+                    <Route path="/update-movie/:movieId" element={<PrivateRoute><UpdateMovie/></PrivateRoute>}/>
                     <Route path="/actors" element={<AllActors/>}/>
                     <Route path="/producers" element={<AllProducers/>}/>
                 </Routes>

@@ -66,6 +66,8 @@ export const updateMovie = async (data, movieId, token, navigate) => {
 }
 
 export const deleteMovie = async (movieId, token, navigate) => {
+    const isOk = confirm("Are you Sure to delete?");
+    if(!isOk) return;
     const toastId = toast.loading("Deleting Movie...");
     try {
         const response = await apiConnector("DELETE", movieApi.DELETE_MOVIE_API+movieId, null, {

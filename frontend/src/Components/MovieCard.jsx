@@ -1,7 +1,18 @@
 /* eslint-disable react/prop-types */
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { FiEdit, FiTrash2 } from "react-icons/fi";
+import { useSelector } from "react-redux";
+import { deleteMovie } from "../services/operations/movieApi";
 
 function MovieCard({movie}) {
+    const {token} = useSelector(state => state.auth);
+    const navigate = useNavigate();
+
+    const handleDelete = async (movieId) => {
+        console.log(movieId);
+        await deleteMovie(movieId, token, navigate);
+    }
+
 	return (
         <Link to={`/movie/${movie?._id}`} key={movie?._id} className="flex flex-col items-center border-2 border-gray-700 w-[300px] h-[520px] max-sm:w-[90%] p-3 rounded-lg">
             <img
@@ -14,12 +25,27 @@ function MovieCard({movie}) {
             <p className="text-sm mt-2 max-sm:px-7 text-gray-400 h-[12%] /*h-[50px]*/">
                 {movie?.plot.substring(0, 70)}{movie?.plot?.length>70 && "..."}
             </p>
-            <p className="bg-gray-700 p-2 px-3 mt-0 rounded-full">
-                Watch Trailer
-            </p>
+            {
+                token 
+                ?
+                <div className="flex max-sm:mt-3 items-center gap-5">
+                    <Link to={`/update-movie/${movie?._id}`} className="text-green-500 p-2 flex gap-1 items-center">
+                        <FiEdit className="text-3xl"/>
+                        <p className="text-lg">Edit</p>
+                    </Link>
+                    <button onClick={() => handleDelete(movie?._id)} className="text-red-500 p-2 flex gap-1 items-center">
+                        <FiTrash2 className="text-3xl"/>
+                        <p className="text-lg">Delete</p>
+                    </button>
+                </div>
+                :
+                <Link className="bg-app w-[75%] hover:opacity-90 text-center p-2 text-black text-lg rounded-md" to={"/login"}>
+                    Login to Edit
+                </Link>
+            }
             {/* <p className="mt-1 text-[15px]">Cast:</p>
             <div className="flex flex-wrap gap-2">
-                {m?.actors?.slice(0, 4)?.map(a => (
+                {movie?.actors?.slice(0, 4)?.map(a => (
                     <p key={a._id} className="text-sm p-1 px-2 rounded-full bg-gray-700 w-fit">
                         {a?.name}
                     </p>
