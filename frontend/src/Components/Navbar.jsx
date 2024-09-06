@@ -18,6 +18,10 @@ function Navbar() {
                 <img src={Logo} alt="logo" className="h-[45px]"/>
                 {/* <p className="text-2xl font-medium">Lite</p> */}
             </Link>
+            <div className="flex items-center gap-5">
+                <Link to={"/actors"}>All Actors</Link>
+                <Link to={"/producers"}>All Producers</Link>
+            </div>
             <div>
                 {
                     token 

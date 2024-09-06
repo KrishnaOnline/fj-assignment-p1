@@ -31,7 +31,6 @@ function ConfigureMovie({type, data, setData}) {
         console.log(response);
         setAllProducers(response);
     }
-
     useEffect(() => {
         fetchAllActors();
         fetchAllProducers();
@@ -94,7 +93,6 @@ function ConfigureMovie({type, data, setData}) {
 
     let selectedActors = [];
     let selectedProducer = [];
-
     if(type==="Edit") {
         selectedActors = data?.actors?.map(actor => ({
             value: actor?._id,

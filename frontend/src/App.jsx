@@ -10,6 +10,8 @@ import Actor from "./Pages/Actor";
 import Producer from "./Pages/Producer";
 import AddMovie from "./Pages/AddMovie";
 import UpdateMovie from "./Pages/UpdateMovie";
+import AllActors from "./Pages/AllActors";
+import AllProducers from "./Pages/AllProducers";
 
 function App() {
 
@@ -27,6 +29,8 @@ function App() {
                     <Route path="/producer/:producerId" element={<Producer/>}/>
                     <Route path="/add-movie" element={<AddMovie/>}/>
                     <Route path="/update-movie/:movieId" element={<UpdateMovie/>}/>
+                    <Route path="/actors" element={<AllActors/>}/>
+                    <Route path="/producers" element={<AllProducers/>}/>
                 </Routes>
             </div>
         </div>
