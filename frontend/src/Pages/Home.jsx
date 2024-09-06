@@ -18,7 +18,7 @@ function Home() {
 
 	return (
         <div className="mt-8 mb-10">
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between flex-wrap gap-5 items-center">
                 <div className="flex items-center gap-4 px-10">
                     <Link to={"/add-movie"} className="bg-green-600 p-[5px] px-[10px] border-2 border-black rounded-lg text-black text-lg">
                         Create new Movie
@@ -28,7 +28,7 @@ function Home() {
                         <Link className="text-lg border-2 border-gray-700 p-[5px] px-[10px] rounded" to={"/producers"}>All Producers</Link>
                     </div>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center px-10 gap-2">
                     <p className="text-lg underline pr-3">Profiles: </p>
                     <Link className="text-lg border-2 border-gray-700 bg-[#1E3A8A] p-[5px] px-[10px] rounded" target="_blank" to={"https://krishnavamshi-portfolio.netlify.app/"}>Portfolio</Link>
                     <Link className="text-lg border-2 border-gray-700 bg-[#242938] p-[5px] px-[10px] rounded" target="_blank" to={"https://github.com/KrishnaOnline"}>GitHub</Link>
