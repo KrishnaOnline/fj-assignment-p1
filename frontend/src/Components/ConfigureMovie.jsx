@@ -103,7 +103,7 @@ function ConfigureMovie({type, data, setData}) {
         selectedProducer = {
             value: data?.producer?._id,
             label: data?.producer?.name,
-        }
+        };
     } else if(type==="Add") {
         selectedActors = actorOptions?.filter(opt => data?.actors.includes(opt.value));
         selectedProducer = producerOptions?.find(opt => opt.value===data?.producer);
