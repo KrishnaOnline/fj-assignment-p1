@@ -9,7 +9,7 @@ function Individual({data, role}) {
                 <p className="text-gray-300 text-base">{data?.bio}</p>
             </div>
             <p className="text-2xl underline">Movies Associated:</p>
-            <div className="mt-7 flex flex-wrap max-sm:justify-center /*justify-center*/ gap-5">
+            <div className="mt-7 flex flex-wrap justify-center /*justify-center*/ gap-5">
                 {
                     data?.movies?.map(m => (
                         <MovieCard key={m?._id} movie={m}/>

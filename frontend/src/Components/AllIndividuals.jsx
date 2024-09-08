@@ -8,7 +8,7 @@ function AllIndividuals({data, role}) {
             <div className="pl-5 flex flex-col flex-wrap gap-3 /*border-b border-gray-700*/ pb-3">
                 <p className="text-4xl text-app">{role}s</p>
             </div>
-            <div className="flex flex-wrap mt-5 gap-5 justify-start w-full mx-auto">
+            <div className="flex flex-wrap mt-5 gap-5 justify-center w-full mx-auto">
                 {
                     data?.map(p => (
                         <Link to={`/${role.toLowerCase()}/${p?._id}`} className="flex max-md:w-full max-md:h-fit flex-col w-[300px] h-[200px] border-2 border-gray-700 rounded-lg p-3" key={p?._id}>

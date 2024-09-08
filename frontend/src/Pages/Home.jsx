@@ -35,7 +35,7 @@ function Home() {
                     <Link className="text-lg border-2 border-gray-700 bg-[#0077B5] p-[5px] px-[10px] rounded" target="_blank" to={"https://www.linkedin.com/in/krishna-vamshi-kusuma-11717b213/"}>LinkedIn</Link>
                 </div>
             </div>
-            <div className="flex mt-10 flex-wrap max-sm:justify-center /*justify-center*/ gap-5">
+            <div className="flex mt-10 flex-wrap justify-center /*justify-center*/ gap-5">
                 {
                     movies?.length===0
                     ?
