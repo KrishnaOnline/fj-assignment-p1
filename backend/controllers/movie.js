@@ -99,6 +99,12 @@ const updateMovie = async (req, res) => {
                 throwError(null, "Movie doesn't exists")
             );
         }
+        await Producer.findByIdAndUpdate(updates?.producer, {
+            $push: {movies: newMovie._id}
+        }, {new: true});
+        await Actor.updateMany({_id: {$in: updates?.actors}}, {
+            $push: {movies: newMovie._id}
+        });
         return res.status(201).json(
             fetchResponse(updatedMovie, "Updated movie details")
         );
