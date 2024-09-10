@@ -93,15 +93,34 @@ const updateMovie = async (req, res) => {
                 throwError(null, "Enter Valid Year")
             );
         }
-        const updatedMovie = await Movie.findByIdAndUpdate(id, updates, {new: true});
-        if(!updatedMovie) {
+        const existingMovie = await Movie.findById(id);
+        if(!existingMovie) {
             return res.status(404).json(
                 throwError(null, "Movie doesn't exists")
             );
         }
-        await Actor.updateMany({_id: {$in: updates?.actors}}, {
-            $push: {movies: updatedMovie._id}
-        });
+        const updatedMovie = await Movie.findByIdAndUpdate(id, updates, {new: true});
+        if(updates?.producer && updates.producer!==existingMovie.producer.toString()) {
+            await Producer.findByIdAndUpdate(updates.producer, {
+                $addToSet: {movies: updatedMovie._id}
+            }, {new: true});
+            await Producer.findByIdAndUpdate(existingMovie.producer, {
+                $pull: {movies: updatedMovie._id}
+            });
+        }
+        const removedActors = existingMovie.actors.filter(
+            actorId => !updates.actors.includes(actorId.toString())
+        );
+        if(removedActors.length > 0) {
+            await Actor.updateMany(
+                {_id: {$in: removedActors}},
+                {$pull: {movies: updatedMovie._id}}
+            );
+        }
+        await Actor.updateMany(
+            {_id: {$in: updates?.actors}},
+            {$addToSet: {movies: updatedMovie._id}}
+        );
         return res.status(201).json(
             fetchResponse(updatedMovie, "Updated movie details")
         );
