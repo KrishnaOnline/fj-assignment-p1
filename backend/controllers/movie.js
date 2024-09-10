@@ -101,12 +101,12 @@ const updateMovie = async (req, res) => {
         }
         const updatedMovie = await Movie.findByIdAndUpdate(id, updates, {new: true});
         if(updates?.producer && updates.producer!==existingMovie.producer.toString()) {
-            await Producer.findByIdAndUpdate(updates.producer, {
-                $addToSet: {movies: updatedMovie._id}
-            }, {new: true});
             await Producer.findByIdAndUpdate(existingMovie.producer, {
                 $pull: {movies: updatedMovie._id}
             });
+            await Producer.findByIdAndUpdate(updates.producer, {
+                $addToSet: {movies: updatedMovie._id}
+            }, {new: true});
         }
         const removedActors = existingMovie.actors.filter(
             actorId => !updates.actors.includes(actorId.toString())
