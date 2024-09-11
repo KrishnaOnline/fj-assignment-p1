@@ -14,7 +14,7 @@ function MovieCard({movie}) {
     }
 
 	return (
-        <Link to={`/movie/${movie?._id}`} key={movie?._id} className="flex flex-col items-center border-2 border-gray-700 w-[300px] h-[520px] max-sm:w-[90%] p-3 rounded-lg">
+        <Link to={`/movie/${movie?._id}`} key={movie?._id} className="flex flex-col hover:bg-gray-800 items-center border-2 border-gray-700 w-[300px] h-[520px] max-sm:w-[90%] p-3 rounded-lg">
             <img
                 className="/*h-[325px]*/ min-h-[65%] max-h-[65%] w-[270px] max-sm:w-[95%] rounded" 
                 src={movie?.poster}

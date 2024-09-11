@@ -11,7 +11,7 @@ function AllIndividuals({data, role}) {
             <div className="flex flex-wrap mt-5 gap-5 justify-center w-full mx-auto">
                 {
                     data?.map(p => (
-                        <Link to={`/${role.toLowerCase()}/${p?._id}`} className="flex max-md:w-full max-md:h-fit flex-col w-[300px] h-[200px] border-2 border-gray-700 rounded-lg p-3" key={p?._id}>
+                        <Link to={`/${role.toLowerCase()}/${p?._id}`} className="flex max-md:w-full hover:bg-gray-800 max-md:h-fit flex-col w-[300px] h-[200px] border-2 border-gray-700 rounded-lg p-3" key={p?._id}>
                             <p className="text-xl mb-1 font-medium border-b pb-1 border-gray-700">
                                 {p?.name?.substring(0, 30)}{p?.name?.length>20 && "..."} <span className="text-sm text-gray-300">({p?.gender})</span>
                             </p>
