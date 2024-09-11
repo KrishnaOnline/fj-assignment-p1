@@ -13,6 +13,7 @@ import AllActors from "./Pages/AllActors";
 import AllProducers from "./Pages/AllProducers";
 import OpenRoute from "./Components/AuthRoutes/OpenRoute";
 import PrivateRoute from "./Components/AuthRoutes/PrivateRoute";
+import Error from "./Pages/Error";
 
 function App() {
 
@@ -31,6 +32,7 @@ function App() {
                     <Route path="/update-movie/:movieId" element={<PrivateRoute><UpdateMovie/></PrivateRoute>}/>
                     <Route path="/actors" element={<AllActors/>}/>
                     <Route path="/producers" element={<AllProducers/>}/>
+                    <Route path="*" element={<Error/>}/>
                 </Routes>
             </div>
         </div>
