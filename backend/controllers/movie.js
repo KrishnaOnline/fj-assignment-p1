@@ -99,14 +99,12 @@ const updateMovie = async (req, res) => {
                 throwError(null, "Movie doesn't exists")
             );
         }
-        if(updates?.trailer) {
-            if(!getYtVideoId(updates?.trailer)) {
-                return res.status(403).json(
-                    throwError(null, "Provide Valid Youtube Url")
-                );
-            }
-            updates.trailer = getYtVideoId(updates?.trailer);
-        }
+        // if(updates?.trailer && !getYtVideoId(updates?.trailer)) {
+        //     return res.status(403).json(
+        //         throwError(null, "Provide Valid Youtube Url")
+        //     );
+        // }
+        // updates.trailer = getYtVideoId(updates?.trailer);
         
         const updatedMovie = await Movie.findByIdAndUpdate(id, updates, {new: true});
         if(updates?.producer && updates.producer!==existingMovie.producer.toString()) {
