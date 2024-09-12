@@ -78,7 +78,6 @@ function ConfigureMovie({type, data, setData}) {
         }
     }
 
-    console.log(data);
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(data);
@@ -86,6 +85,9 @@ function ConfigureMovie({type, data, setData}) {
             const response = await createMovie(data, token, navigate);
             console.log(response);
         } else if(type==="Edit") {
+            if(!data?.trailer.startsWith("http")) {
+                data.trailer = `https://www.youtube.com/watch?v=${data?.trailer}`;
+            }
             const response = await updateMovie(data, movieId, token, navigate);
             console.log(response);
         }
