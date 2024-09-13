@@ -33,9 +33,9 @@ function Home() {
                 </div>
                 <div className="flex items-center px-10 gap-2">
                     {/* <p className="text-lg underline pr-3">Profiles: </p> */}
-                    <Link className="text-lg border-2 border-gray-700 bg-[#1E3A8A] p-[5px] px-[10px] rounded" target="_blank" to={"https://krishnavamshi-portfolio.netlify.app/"}>Portfolio</Link>
-                    <Link className="text-lg border-2 border-gray-700 bg-[#242938] p-[5px] px-[10px] rounded" target="_blank" to={"https://github.com/KrishnaOnline"}>GitHub</Link>
-                    <Link className="text-lg border-2 border-gray-700 bg-[#0077B5] p-[5px] px-[10px] rounded" target="_blank" to={"https://www.linkedin.com/in/krishna-vamshi-kusuma-11717b213/"}>LinkedIn</Link>
+                    <Link className="text-lg border-2 border-gray-700 bg-[#1E3A8A] p-[5px] px-[10px] rounded" target="_blank" to={"https://dub.sh/krishnavamshi"}>Portfolio</Link>
+                    <Link className="text-lg border-2 border-gray-700 bg-[#242938] p-[5px] px-[10px] rounded" target="_blank" to={"https://git.new/krishna-github"}>GitHub</Link>
+                    <Link className="text-lg border-2 border-gray-700 bg-[#0077B5] p-[5px] px-[10px] rounded" target="_blank" to={"https://dub.sh/kkv-linkedin"}>LinkedIn</Link>
                 </div>
             </div>
             {
